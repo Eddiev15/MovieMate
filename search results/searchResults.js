@@ -27,15 +27,15 @@ $("#search-button").on("click",function(){
     }).then(function(response){
         jsonData = response;
         tmdbData = response;
-    }).ajax({
+    }).then($.ajax({
         url: omdbURL,
         method: "GET",
         async: false
     }).then(function(response){
         omdbData = response;
-    });
 
-    tables(tmdbData,omdbData);
+        tables(tmdbData,omdbData);
+    }));
 });
 
 // --- --- --- translates TMDB code into actual parsable data --- --- ---
