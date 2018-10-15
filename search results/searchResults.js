@@ -1,4 +1,5 @@
 var jsonData = {};
+var omdbArray = [];
 
 function jsonGrab(queryURL){
     $.ajax({
@@ -10,32 +11,25 @@ function jsonGrab(queryURL){
         // --- outputs JSON data so there's no need to reuse code
 }
 
-$("#search-button").on("click",function(){
+$("#search-button").on("click",function(event){
     event.preventDefault();
 
     var input = $("#search").val();
     input.split(' ').join('+');
     tmdbURL = "https://api.themoviedb.org/3/search/multi?api_key=d19279e423255c630256c57ee162db9f&language=en-US&page=1&include_adult=false&query="+input;
-    omdbURL = "https://www.omdbapi.com/?t="+input+"&y=&plot=short&apikey=trilogy";
-    var omdbData = {};
+    var omdbData = [];
     var tmdbData = {};
 
     $.ajax({
         url: tmdbURL,
         method: "GET",
-        async: false
     }).then(function(response){
         jsonData = response;
         tmdbData = response;
-    }).then($.ajax({
-        url: omdbURL,
-        method: "GET",
-        async: false
-    }).then(function(response){
-        omdbData = response;
 
-        tables(tmdbData,omdbData);
-    }));
+        populateList(tmdbData);
+    });
+
 });
 
 // --- --- --- translates TMDB code into actual parsable data --- --- ---
@@ -63,29 +57,49 @@ function printGenres(genreData){
 }
 
 // --- --- --- makes a new row of data for the table --- --- ---
-function tables(tmdb,omdb){
-    console.log(tmdb);
-    var tmdbData = tmdb.results[0];
-    var omdbData  = omdb; 
+function tables(tmdbData){
+    // var tmdbData = tmdb.results[0];
+    var tmdbTitle = tmdbData.title;
+    var omdbURL = "https://www.omdbapi.com/?t="+tmdbTitle+"&y=&plot=short&apikey=trilogy";
 
-    var newRow = $("<tr>");
-    newRow.attr("id",tmdbData.title);
+    console.log(tmdbData);
 
-    var name = $("<th>");
-    name.attr("data-name",)
-    name.text(tmdbData.title);
-    var rating = $("<th>");
-    rating.text(tmdbData.vote_average);
-    var genres = $("<th>");
-    genres.text(printGenres(tmdbData.genre_ids));
-    var length = $("<th>");
-    length.text(omdbData.Runtime);
-    var rated = $("<th>");
-    rated.text(omdbData.Rated);
+    $.ajax({
+        url: omdbURL,
+        method: "GET"
+    }).then(function(response){
+        var omdbData = response;
+        console.log(omdbData);
 
-    $("tbody").append(newRow);
+        var newRow = $("<tr>");
+        newRow.attr("id",tmdbTitle);
 
-    newRow.append(rated).append(rating).append(name).append(length).append(genres);
+        var name = $("<th>");
+        name.attr("data-name",tmdbTitle);
+        name.text(tmdbTitle);
+        var rating = $("<th>");
+        rating.text(tmdbData.vote_average);
+        var genres = $("<th>");
+        genres.text(printGenres(tmdbData.genre_ids));
+        var length = $("<th>");
+        length.text(omdbData.Runtime);
+        var rated = $("<th>");
+        rated.text(omdbData.Rated);
+        var type = $("<th>");
+        type.text(tmdbData.media_type);
+        type.attr("data-show-type",tmdbData.media_type);
+
+        $("tbody").append(newRow);
+
+        newRow.append(rated).append(rating).append(name).append(type).append(length).append(genres);
+    });
 }
 
-// --- --- --- 
+// --- --- --- loop function for populating tables --- --- ---
+function populateList(tmdb){
+    var tmdbList = tmdb.results;
+
+    for(var i=0 ; i < tmdbList.length ; i++){
+        tables(tmdbList[i]);
+    }
+}
