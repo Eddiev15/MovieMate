@@ -17,7 +17,6 @@ $("#search-button").on("click",function(event){
     var input = $("#search").val();
     input.split(' ').join('+');
     tmdbURL = "https://api.themoviedb.org/3/search/multi?api_key=d19279e423255c630256c57ee162db9f&language=en-US&page=1&include_adult=false&query="+input;
-    var omdbData = [];
     var tmdbData = {};
 
     $.ajax({
@@ -76,15 +75,24 @@ function tables(tmdbData){
 
         var name = $("<th>");
         name.attr("data-name",tmdbTitle);
-        name.text(tmdbTitle);
+        var nameLink = $("<a>")
+        nameLink.addClass("show-link");
+        nameLink.attr("data-show-type",tmdbData.media_type);
+        nameLink.text(tmdbTitle);
+        name.append(nameLink);
+
         var rating = $("<th>");
         rating.text(tmdbData.vote_average);
+
         var genres = $("<th>");
         genres.text(printGenres(tmdbData.genre_ids));
+
         var length = $("<th>");
         length.text(omdbData.Runtime);
+
         var rated = $("<th>");
         rated.text(omdbData.Rated);
+
         var type = $("<th>");
         type.text(tmdbData.media_type);
         type.attr("data-show-type",tmdbData.media_type);
@@ -92,6 +100,12 @@ function tables(tmdbData){
         $("tbody").append(newRow);
 
         newRow.append(rated).append(rating).append(name).append(type).append(length).append(genres);
+
+        if(tmdbData.media_type == "movie"){
+            nameLink.attr("href","movie-test.html");
+        } else if(tmdbData.media_type == "tv") {
+            nameLink.attr("href","tv-test.html");
+        }
     });
 }
 
@@ -103,3 +117,26 @@ function populateList(tmdb){
         tables(tmdbList[i]);
     }
 }
+
+// --- --- --- initialize firebase --- --- ---
+var config = {
+    apiKey: "AIzaSyALG9fx6_VKlL18XRaVMYRJYfof2FIIVYY",
+    authDomain: "moviemate-pagepass.firebaseapp.com",
+    databaseURL: "https://moviemate-pagepass.firebaseio.com",
+    projectId: "moviemate-pagepass",
+    storageBucket: "moviemate-pagepass.appspot.com",
+    messagingSenderId: "611011241053"
+};
+
+firebase.initializeApp(config);
+var database = firebase.database();
+
+// --- --- --- make link --- --- ---
+$(".show-link").on("click",function(){
+    var sendInfo = $(this).text();
+    console.log(sendInfo);
+
+    database.ref("temp-data/link-data").set({
+        data: sendInfo
+    });
+});
