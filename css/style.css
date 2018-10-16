@@ -129,10 +129,12 @@ h3, h2 {
 
 .d-block {
   width: 450px;
-  height: 200px;
+  height: 300px;
 }
 
-
+#carouselExampleIndicators {
+  width:470px;
+}
 
 /* footer */
 
