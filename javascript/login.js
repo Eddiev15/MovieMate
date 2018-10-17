@@ -35,7 +35,7 @@
         
      
     // Get elements
-          const btnLogin = document.getElementById('btnLogin');
+          var btnLogin = document.getElementById('btnLogin');
 
        // Click event listener
           btnLogin.addEventListener('click', e => {
