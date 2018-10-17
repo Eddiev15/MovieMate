@@ -13,18 +13,5 @@ var app_fireBase = {};
   };
   firebase.initializeApp(config);
   
-  // Get elements
-  const btnLogin = document.getElementById('btnLogin');
-
-  // Click event listener
-  btnLogin.addEventListener('click', e => {
-    firebase.auth().signInAnonymously();
-  });
-  
-  // Auth Listener
-  firebase.auth().onAuthStateChanged(firebaseUser => {
-    console.log(firebaseUser);  
-  });
-  
   app_fireBase = firebase;
 })()
