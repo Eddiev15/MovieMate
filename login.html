@@ -11,6 +11,13 @@
     
 </head>
 <body>
+    
+    
+        <h1>Welcome to My Awesome App</h1>
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
+    <script src="javascript/fireBase.js"></script>
+    <script src="javascript/login.js"></script>
     <script>
         onTryAsGuestPress = () => {
              firebase.auth().signInAnonymously();
@@ -19,11 +26,5 @@
         <button onclick="onTryAsGuestPress()">Login as Guest</button>
       
     </script>
-    
-        <h1>Welcome to My Awesome App</h1>
-        <div id="firebaseui-auth-container"></div>
-        <div id="loader">Loading...</div>
-    <script src="javascript/fireBase.js"></script>
-    <script src="javascript/login.js"></script>
 </body>
 </html>
