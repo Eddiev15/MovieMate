@@ -16,7 +16,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 });
 
-function logOut(){
+function guest(){
     firebase.auth().signInAnonymously();
 });
     
