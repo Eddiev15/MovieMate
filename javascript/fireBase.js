@@ -12,6 +12,14 @@ var app_fireBase = {};
     messagingSenderId: "320634779607"
   };
   firebase.initializeApp(config);
+  
+  // Get elements
+  const btnLogin = document.getElementById('btnLogin');
 
+  // Click event listener
+  btnLogin.addEventListener('click', e => {
+    firebase.auth().signInAnonymously();
+  });
+  
   app_fireBase = firebase;
 })()
