@@ -23,8 +23,3 @@ mainApp.logOut = logOut;
 
 })()
 
-// If anonymous, link account...
-if (firebase.auth().currentUser.isAnonymous) {
-  var cred = firebase.auth.EmailAuthProvider.credential(email, password);
-  firebase.auth().currentUser.linkAndRetrieveDataWithCredential(cred);
-}
