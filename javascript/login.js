@@ -1,4 +1,8 @@
 
+
+ // Get elements
+          const btnLogin = document.getElementById('btnLogin');
+
 (function(){
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
@@ -32,24 +36,7 @@
           //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
         
-        
-     
-              
-        
-        // Terms of service url.
-        tosUrl: 'mmindex.html',
-        // Privacy policy url.
-        privacyPolicyUrl: '<your-privacy-policy-url>'
-      };
-    
-      
-
-      ui.start('#firebaseui-auth-container', uiConfig);
-})()
-
-
-    // Get elements
-          var btnLogin = document.getElementById('btnLogin');
+       
 
        // Click event listener
           btnLogin.addEventListener('click', e => {
@@ -65,6 +52,19 @@
          // User is signed out.
          // ...
            }
-          // ...       
-                 
-          });
+          };
+     
+              
+        
+        // Terms of service url.
+        tosUrl: 'mmindex.html',
+        // Privacy policy url.
+        privacyPolicyUrl: '<your-privacy-policy-url>'
+      };
+    
+      
+
+      ui.start('#firebaseui-auth-container', uiConfig);
+})()
+
+
