@@ -35,9 +35,7 @@
         privacyPolicyUrl: '<your-privacy-policy-url>'
       };
     
-    onTryAsGuestPress = () => {
-        firebase.auth().signInAnonymously();
-    }
+    
 
       ui.start('#firebaseui-auth-container', uiConfig);
 })()
