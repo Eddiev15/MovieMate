@@ -16,6 +16,10 @@
             document.getElementById('loader').style.display = 'none';
           }
         },
+           onTryAsGuestPress = () => {
+        firebase.auth().signInAnonymously();
+        }
+         
         // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
         signInFlow: 'popup',
         signInSuccessUrl: 'index.html',
@@ -29,6 +33,8 @@
           firebase.auth().signInAnonymously(),
           //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
+        
+        
         // Terms of service url.
         tosUrl: 'mmindex.html',
         // Privacy policy url.
