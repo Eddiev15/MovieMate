@@ -34,6 +34,20 @@
         
         
      
+              
+        
+        // Terms of service url.
+        tosUrl: 'mmindex.html',
+        // Privacy policy url.
+        privacyPolicyUrl: '<your-privacy-policy-url>'
+      };
+    
+      
+
+      ui.start('#firebaseui-auth-container', uiConfig);
+})()
+
+
     // Get elements
           var btnLogin = document.getElementById('btnLogin');
 
@@ -54,16 +68,3 @@
           // ...       
                  
           });
-    
-              
-        
-        // Terms of service url.
-        tosUrl: 'mmindex.html',
-        // Privacy policy url.
-        privacyPolicyUrl: '<your-privacy-policy-url>'
-      };
-    
-      
-
-      ui.start('#firebaseui-auth-container', uiConfig);
-})()
