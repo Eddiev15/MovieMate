@@ -11,10 +11,12 @@ function jsonGrab(queryURL){
         // --- outputs JSON data so there's no need to reuse code
 }
 
-$("#search-button").on("click",function(event){
+$("#movie-button").on("click",function(event){
     event.preventDefault();
 
-    var input = $("#search").val();
+    var input = $("#search-input").val();
+    console.log(input);
+
     input.split(' ').join('+');
     tmdbURL = "https://api.themoviedb.org/3/search/multi?api_key=d19279e423255c630256c57ee162db9f&language=en-US&page=1&include_adult=false&query="+input;
     var tmdbData = {};
@@ -61,51 +63,53 @@ function tables(tmdbData){
     var tmdbTitle = tmdbData.title;
     var omdbURL = "https://www.omdbapi.com/?t="+tmdbTitle+"&y=&plot=short&apikey=trilogy";
 
-    console.log(tmdbData);
+    //console.log(tmdbData);
 
     $.ajax({
         url: omdbURL,
         method: "GET"
     }).then(function(response){
         var omdbData = response;
-        console.log(omdbData);
+        //console.log(omdbData);
 
-        var newRow = $("<tr>");
-        newRow.attr("id",tmdbTitle);
+        if(omdbData.Error != "Movie not found!" || omdbData.Response != "false" || omdbData.Title != "Undefined"){
+            var newRow = $("<tr>");
+            newRow.attr("id",tmdbTitle);
 
-        var name = $("<th>");
-        name.attr("data-name",tmdbTitle);
-        var nameLink = $("<a>")
-        nameLink.addClass("show-link");
-        nameLink.attr("data-show-type",tmdbData.media_type);
-        nameLink.text(tmdbTitle);
-        name.append(nameLink);
+            var name = $("<th>");
+            name.attr("data-name",tmdbTitle);
+            var nameLink = $("<a>");
+            nameLink.addClass("show-link");
+            nameLink.attr("data-show-type",tmdbData.media_type);
+            nameLink.text(tmdbTitle);
+            name.append(nameLink);
 
-        var rating = $("<th>");
-        rating.text(tmdbData.vote_average);
+            var rating = $("<th>");
+            rating.text(tmdbData.vote_average);
 
-        var genres = $("<th>");
-        genres.text(printGenres(tmdbData.genre_ids));
+            var genres = $("<th>");
+            genres.text(printGenres(tmdbData.genre_ids));
 
-        var length = $("<th>");
-        length.text(omdbData.Runtime);
+            var length = $("<th>");
+            length.text(omdbData.Runtime);
 
-        var rated = $("<th>");
-        rated.text(omdbData.Rated);
+            var rated = $("<th>");
+            rated.text(omdbData.Rated);
 
-        var type = $("<th>");
-        type.text(tmdbData.media_type);
-        type.attr("data-show-type",tmdbData.media_type);
+            var type = $("<th>");
+            type.text(tmdbData.media_type);
+            type.attr("data-show-type",tmdbData.media_type);
 
-        $("tbody").append(newRow);
+            $("tbody").append(newRow);
 
-        newRow.append(rated).append(rating).append(name).append(type).append(length).append(genres);
-
-        if(tmdbData.media_type == "movie"){
-            nameLink.attr("href","movie-test.html");
-        } else if(tmdbData.media_type == "tv") {
-            nameLink.attr("href","tv-test.html");
+            newRow.append(rated).append(rating).append(name).append(type).append(length).append(genres);
         }
+
+        // if(tmdbData.media_type == "movie"){
+        //     nameLink.attr("data-link","movie-test.html");
+        // } else if(tmdbData.media_type == "tv") {
+        //     nameLink.attr("data-link","tv-test.html");
+        // }
     });
 }
 
@@ -113,30 +117,64 @@ function tables(tmdbData){
 function populateList(tmdb){
     var tmdbList = tmdb.results;
 
+    var newTable = $("<table>");
+    newTable.attr("id","search-table");
+    var newthread = $("<thread>");
+    newthread.attr("id","search-thread");
+    var newTbody = $("<tbody>");
+    newTbody.attr("id","search-tbody");
+    var newRow = $("<tr>");
+    newRow.attr("id","search-categories");
+
+    $(".information").append(newTable);
+    $("#search-table").append(newthread);
+    $("#search-thread").append(newTbody);
+    $("#search-tbody").append(newRow);
+    
+    var searchTitle = $("<th>");
+    searchTitle.text("Title");
+
+    var searchRating = $("<th>");
+    searchRating.text("Rating");
+
+    var searchType = $("<th>");
+    searchType.text("Type");
+
+    var searchRuntime = $("<th>");
+    searchRuntime.text("Runetime");
+
+    var searchGenre = $("<th>");
+    searchGenre.text("Genre(s)");
+
+    var searchReview = $("<th>");
+    searchReview.text("Reviewer Score");
+
+    newRow.append(searchRating).append(searchReview).append(searchTitle).append(searchType).append(searchRuntime).append(searchGenre);
+
     for(var i=0 ; i < tmdbList.length ; i++){
         tables(tmdbList[i]);
     }
 }
 
 // --- --- --- initialize firebase --- --- ---
-var config = {
-    apiKey: "AIzaSyALG9fx6_VKlL18XRaVMYRJYfof2FIIVYY",
-    authDomain: "moviemate-pagepass.firebaseapp.com",
-    databaseURL: "https://moviemate-pagepass.firebaseio.com",
-    projectId: "moviemate-pagepass",
-    storageBucket: "moviemate-pagepass.appspot.com",
-    messagingSenderId: "611011241053"
-};
+// var config = {
+//     apiKey: "AIzaSyCA4386BmHuyZFOS11T506MTKItLI686_0",
+//     authDomain: "moviemate-project.firebaseapp.com",
+//     databaseURL: "https://moviemate-project.firebaseio.com",
+//     projectId: "moviemate-project",
+//     storageBucket: "moviemate-project.appspot.com",
+//     messagingSenderId: "543472060012"
+// };
 
-firebase.initializeApp(config);
-var database = firebase.database();
+// firebase.initializeApp(config);
+// var database = firebase.database();
 
 // --- --- --- make link --- --- ---
-$(".show-link").on("click",function(){
+$(document).on("click", ".show-link",function(){
     var sendInfo = $(this).text();
     console.log(sendInfo);
 
-    database.ref("temp-data/link-data").set({
-        data: sendInfo
-    });
+    // database.ref().set({
+    //     data: sendInfo
+    // });
 });
