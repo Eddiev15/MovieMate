@@ -16,9 +16,7 @@
             document.getElementById('loader').style.display = 'none';
           }
         },
-           onTryAsGuestPress = () => {
-        firebase.auth().signInAnonymously();
-        }
+       
          
         // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
         signInFlow: 'popup',
@@ -30,7 +28,7 @@
           //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
           firebase.auth.GithubAuthProvider.PROVIDER_ID,
           firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          firebase.auth().signInAnonymously(),
+          
           //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
         
