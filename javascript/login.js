@@ -28,7 +28,7 @@
           //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
           firebase.auth.GithubAuthProvider.PROVIDER_ID,
           firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          
+          firebase.auth().signInAnonymously(),
           //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
         
