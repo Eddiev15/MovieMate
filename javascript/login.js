@@ -32,6 +32,20 @@
           //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
         
+        // Get elements
+          const btnLogin = document.getElementById('btnLogin');
+
+       // Click event listener
+          btnLogin.addEventListener('click', e => {
+          firebase.auth().signInAnonymously();
+          });
+  
+       // Auth Listener
+          firebase.auth().onAuthStateChanged(firebaseUser => {
+          console.log(firebaseUser);  
+          });
+    
+              
         
         // Terms of service url.
         tosUrl: 'mmindex.html',
