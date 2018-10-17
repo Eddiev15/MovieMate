@@ -32,7 +32,9 @@
           //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
         
-        // Get elements
+        
+     
+    // Get elements
           const btnLogin = document.getElementById('btnLogin');
 
        // Click event listener
@@ -43,6 +45,14 @@
        // Auth Listener
           firebase.auth().onAuthStateChanged(firebaseUser => {
           console.log(firebaseUser);  
+              if(firebaseUser) {
+                  window.location.href = 'index.html';
+           } else {
+         // User is signed out.
+         // ...
+           }
+          // ...       
+                 
           });
     
               
