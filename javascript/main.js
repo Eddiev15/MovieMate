@@ -20,7 +20,9 @@ function guest(){
     firebase.auth().signInAnonymously();
 });
     
-  
+function logOut(){
+    firebase.auth().signOut();
+}    
 
 mainApp.logOut = logOut;
 
