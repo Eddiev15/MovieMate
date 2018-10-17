@@ -39,7 +39,7 @@
         privacyPolicyUrl: '<your-privacy-policy-url>'
       };
     
-      <Button title="Login as Guest" onPress={this.onTryAsGuestPress} />
+      
 
       ui.start('#firebaseui-auth-container', uiConfig);
 })()
