@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     uid = user.uid
   
   
-  if (uid) {
+  }if (uid) {
       
     uid = uid  
       
