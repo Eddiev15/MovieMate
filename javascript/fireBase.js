@@ -15,9 +15,9 @@ var app_fireBase = {};
   
   app_fireBase = firebase;
   
-  const anonLogin = document.getElementById('anonLogin');
+  const btnLogin = document.getElementById('btnLogin');
   
-  anonLogin.addEventListener('click', e => {
+  btnLogin.addEventListener('click', e => {
     firebase.auth().signInAnonymously();
   });
   
