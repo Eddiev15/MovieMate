@@ -201,7 +201,9 @@ function showDetails(details){
     var poster = $("<img>");
     poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
 
-    
+    $(".information").append(description);
+    $(".information").append(poster);
+    $(".information").append(detail);
 }
 
 <div id="disqus_thread"></div>
