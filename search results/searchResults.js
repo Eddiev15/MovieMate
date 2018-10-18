@@ -59,11 +59,7 @@ function printGenres(genreData){
 
 // --- --- --- makes a new row of data for the table --- --- ---
 function tables(tmdbData){
-<<<<<<< HEAD
-    // var tmdbData = tmdb.results[0];
-=======
   
->>>>>>> fa8a39899f6e1672daceddfc328c39876ded05ef
     var tmdbTitle = tmdbData.title;
     var omdbURL = "https://www.omdbapi.com/?t="+tmdbTitle+"&y=&plot=short&apikey=trilogy";
 
