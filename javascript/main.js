@@ -7,6 +7,11 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
     uid = user.uid
+  
+  
+  if (uid) {
+      
+    uid = uid  
       
   }else{
     // redirect to login page
