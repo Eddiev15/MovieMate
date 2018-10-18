@@ -36,10 +36,7 @@
          
         
  
-        // Click event listener
-          //  btnLogin.addEventListener('click', e => {
-          //  firebase.auth().signInAnonymously();
-          //  });
+      
    
         // Auth Listener
            firebase.auth().onAuthStateChanged(firebaseUser => {
