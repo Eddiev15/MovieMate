@@ -32,24 +32,7 @@
          ],
          
         
- 
-        // Click event listener
-          //  btnLogin.addEventListener('click', e => {
-          //  firebase.auth().signInAnonymously();
-          //  });
-   
-        // Auth Listener
-           firebase.auth().onAuthStateChanged(firebaseUser => {
-           console.log(firebaseUser);  
-               if(firebaseUser) {
-                   window.location.href = 'index.html';
-            } else {
-          // User is signed out.
-          // ...
-            }
-           };
-      
-               
+           
          
          // Terms of service url.
          tosUrl: 'mmindex.html',
