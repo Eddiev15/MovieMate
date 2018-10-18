@@ -14,4 +14,11 @@ var app_fireBase = {};
   firebase.initializeApp(config);
   
   app_fireBase = firebase;
+  
+  const anonLogin = document.getElementById('anonLogin');
+  
+  anonLogin.addEventListener('click', e => {
+    firebase.auth().signInAnonymously();
+  });
+  
 })()
