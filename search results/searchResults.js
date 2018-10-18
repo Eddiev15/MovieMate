@@ -11,7 +11,7 @@ function jsonGrab(queryURL){
         // --- outputs JSON data so there's no need to reuse code
 }
 
-$("#movie-button").on("click",function(event){
+$(document).on("click", "#movie-button",function(event){
     event.preventDefault();
 
     var input = $("#search-input").val();
