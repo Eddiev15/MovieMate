@@ -201,9 +201,18 @@ function showDetails(details){
     var poster = $("<img>");
     poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
 
+    var video = $("<div>");
+    var videoDiv = $("<iframe>");
+    if(details.media_type === "movie"){
+        videoDiv.attr("src","https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
+    } else if(details.media_type === "tv"){
+        videoDiv.attr("src","https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
+    }
+
     $(".information").append(description);
     $(".information").append(poster);
     $(".information").append(detail);
+    $(".information").append(video);
 }
 
 <div id="disqus_thread"></div>
