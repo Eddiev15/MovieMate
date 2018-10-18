@@ -87,6 +87,8 @@ function tables(tmdbData){
             nameLink.attr("id",listPlace);
             console.log("list location: "+listPlace);
 
+            listPlace++;
+
             var rating = $("<th>");
             rating.text(tmdbData.vote_average);
 
@@ -164,9 +166,6 @@ function populateList(tmdb){
     // --- populates the table with actual show data
     for(var i=0 ; i < tmdbList.length ; i++){
         tables(tmdbList[i]);
-
-        // --- changes the value inside the title
-        listPlace++;
     }
 }
 
