@@ -59,18 +59,18 @@ function printGenres(genreData){
 
 // --- --- --- makes a new row of data for the table --- --- ---
 function tables(tmdbData){
-    // var tmdbData = tmdb.results[0];
+    var tmdbData = tmdb.results[0];
     var tmdbTitle = tmdbData.title;
     var omdbURL = "https://www.omdbapi.com/?t="+tmdbTitle+"&y=&plot=short&apikey=trilogy";
 
-    //console.log(tmdbData);
+    console.log(tmdbData);
 
     $.ajax({
         url: omdbURL,
         method: "GET"
     }).then(function(response){
         var omdbData = response;
-        //console.log(omdbData);
+        console.log(omdbData);
 
         if(omdbData.Error != "Movie not found!" || omdbData.Response != "false" || omdbData.Title != "Undefined"){
             var newRow = $("<tr>");
@@ -156,20 +156,7 @@ function populateList(tmdb){
     }
 }
 
-// --- --- --- initialize firebase --- --- ---
-// var config = {
-//     apiKey: "AIzaSyCA4386BmHuyZFOS11T506MTKItLI686_0",
-//     authDomain: "moviemate-project.firebaseapp.com",
-//     databaseURL: "https://moviemate-project.firebaseio.com",
-//     projectId: "moviemate-project",
-//     storageBucket: "moviemate-project.appspot.com",
-//     messagingSenderId: "543472060012"
-// };
-
-// firebase.initializeApp(config);
-// var database = firebase.database();
-
-// --- --- --- make link --- --- ---
+// --- --- --- show details --- --- ---
 $(document).on("click", ".show-link",function(){
     var sendInfo = $(this).text();
     console.log(sendInfo);
