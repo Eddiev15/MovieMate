@@ -222,6 +222,7 @@ function showDetails(details){
 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
 /*
+
 var disqus_config = function () {
 this.page.url = file:///C:/Users/Eddie/Desktop/MovieMate-master/mmindex.html;  // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier ='{{comments-box}}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
