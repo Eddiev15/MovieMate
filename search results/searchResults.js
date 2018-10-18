@@ -83,6 +83,7 @@ function tables(tmdbData){
             nameLink.attr("data-show-type",tmdbData.media_type);
             nameLink.text(tmdbTitle);
             name.append(nameLink);
+            nameLink.attr("value",listPlace);
 
             var rating = $("<th>");
             rating.text(tmdbData.vote_average);
@@ -174,8 +175,10 @@ $(document).on("click", ".show-link",function(){
 
 function showDetails(details){
     var omdb;
+    var detailTitle = details.title;
+    detailTitle.split(' ').join('+');
 
-    var omdbURL = "https://www.omdbapi.com/?t="+details.title+"&y=&plot=short&apikey=trilogy";
+    var omdbURL = "https://www.omdbapi.com/?t="+detailTitle+"&y=&plot=short&apikey=trilogy";
     $.ajax({
         url: omdbURL,
         method: "GET"
