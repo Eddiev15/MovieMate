@@ -174,7 +174,54 @@ $(document).on("click", ".show-link",function(){
     var sendInfo = $(this).text();
     console.log(sendInfo);
 
-    // database.ref().set({
-    //     data: sendInfo
-    // });
+    var showTitle = $(this).attr("value");
+
+    showDetails(tmdbInfo[showTitle]);
 });
+
+function showDetails(details){
+    var omdb;
+
+    var omdbURL = "https://www.omdbapi.com/?t="+details.title+"&y=&plot=short&apikey=trilogy";
+    $.ajax({
+        url: omdbURL,
+        method: "GET"
+    }).then(function(response){
+        omdb = response;
+    });
+
+    $(".information").empty();
+
+    var description = $("<div>");
+    description.text("<h3>Plot</h3>");
+    description.append(details.overview);
+
+    var detail = $("<div>");
+    detail.append("<h3>Details</h3>");
+    detail.append("<ul>");
+    detail.append("<li>Release Date: "+details.release_date+"</li>");
+    detail.append("<li>Type: "+details.media_type+"</li>");
+    if(details.media_type === "movie"){
+        detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
+        detail.append("<li>Director: "+omdb.Director+"</li>");
+        detail.append("<li>Cast :"+omdb.Actors+"</li>");
+    }
+    detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
+    detail.append("<li>Average Rating: "+details.vote_average+"</li>");
+
+    var poster = $("<img>");
+    poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
+
+    var video = $("<div>");
+    var videoDiv = $("<iframe>");
+    if(details.media_type === "movie"){
+        videoDiv.attr("src","https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
+    } else if(details.media_type === "tv"){
+        videoDiv.attr("src","https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
+    }
+
+    $(".information").append(description);
+    $(".information").append(poster);
+    $(".information").append(detail);
+    $(".information").append(video);
+}
