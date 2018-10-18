@@ -83,6 +83,7 @@ function tables(tmdbData){
             nameLink.attr("data-show-type",tmdbData.media_type);
             nameLink.text(tmdbTitle);
             name.append(nameLink);
+            // --- value for the temporary array
             nameLink.attr("value",listPlace);
 
             var rating = $("<th>");
@@ -116,10 +117,14 @@ function tables(tmdbData){
 
 // --- --- --- loop function for populating tables --- --- ---
 var tmdbInfo = [];
-var listPlace = 0;
+var listPlace;
 
 function populateList(tmdb){
     var tmdbList = tmdb.results;
+    listPlace = 0;
+
+    // --- copies tmdb list into temporary array
+    tmdbInfo = tmdbList;
 
     var newTable = $("<table>");
     newTable.attr("id","search-table");
@@ -155,10 +160,11 @@ function populateList(tmdb){
 
     newRow.append(searchRating).append(searchReview).append(searchTitle).append(searchType).append(searchRuntime).append(searchGenre);
 
+    // --- populates the table with actual show data
     for(var i=0 ; i < tmdbList.length ; i++){
         tables(tmdbList[i]);
 
-        tmdbInfo = tmdbList[i];
+        // --- changes the value inside the title
         listPlace++;
     }
 }
@@ -184,40 +190,40 @@ function showDetails(details){
         method: "GET"
     }).then(function(response){
         omdb = response;
+
+        var description = $("<div>");
+        description.text("<h3>Plot</h3>");
+        description.append(details.overview);
+
+        var detail = $("<div>");
+        detail.append("<h3>Details</h3>");
+        detail.append("<ul>");
+        detail.append("<li>Release Date: "+details.release_date+"</li>");
+        detail.append("<li>Type: "+details.media_type+"</li>");
+        if(details.media_type === "movie"){
+            detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
+            detail.append("<li>Director: "+omdb.Director+"</li>");
+            detail.append("<li>Cast :"+omdb.Actors+"</li>");
+        }
+        detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
+        detail.append("<li>Average Rating: "+details.vote_average+"</li>");
+
+        var poster = $("<img>");
+        poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
+
+        var video = $("<div>");
+        var videoDiv = $("<iframe>");
+        if(details.media_type === "movie"){
+            videoDiv.attr("src","https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
+        } else if(details.media_type === "tv"){
+            videoDiv.attr("src","https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
+        }
+
+        $(".information").append(description);
+        $(".information").append(poster);
+        $(".information").append(detail);
+        $(".information").append(video);
     });
 
     $(".information").empty();
-
-    var description = $("<div>");
-    description.text("<h3>Plot</h3>");
-    description.append(details.overview);
-
-    var detail = $("<div>");
-    detail.append("<h3>Details</h3>");
-    detail.append("<ul>");
-    detail.append("<li>Release Date: "+details.release_date+"</li>");
-    detail.append("<li>Type: "+details.media_type+"</li>");
-    if(details.media_type === "movie"){
-        detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
-        detail.append("<li>Director: "+omdb.Director+"</li>");
-        detail.append("<li>Cast :"+omdb.Actors+"</li>");
-    }
-    detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
-    detail.append("<li>Average Rating: "+details.vote_average+"</li>");
-
-    var poster = $("<img>");
-    poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
-
-    var video = $("<div>");
-    var videoDiv = $("<iframe>");
-    if(details.media_type === "movie"){
-        videoDiv.attr("src","https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
-    } else if(details.media_type === "tv"){
-        videoDiv.attr("src","https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
-    }
-
-    $(".information").append(description);
-    $(".information").append(poster);
-    $(".information").append(detail);
-    $(".information").append(video);
 }
