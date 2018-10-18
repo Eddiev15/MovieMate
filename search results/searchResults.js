@@ -84,7 +84,7 @@ function tables(tmdbData){
             nameLink.text(tmdbTitle);
             name.append(nameLink);
             // --- value for the temporary array
-            nameLink.attr("value",listPlace);
+            nameLink.attr("id",listPlace);
 
             var rating = $("<th>");
             rating.text(tmdbData.vote_average);
@@ -174,7 +174,7 @@ $(document).on("click", ".show-link",function(){
     var sendInfo = $(this).text();
     console.log(sendInfo);
 
-    var showTitle = $(this).attr("value");
+    var showTitle = parseInt($(this).attr("id"));
 
     showDetails(tmdbInfo[showTitle]);
 });
