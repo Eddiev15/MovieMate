@@ -1,9 +1,6 @@
- // Get elements
- const btnLogin = document.getElementById('btnLogin');
 
- (function(){
+  (function(){
      var ui = new firebaseui.auth.AuthUI(firebase.auth());
- 
      var uiConfig = {
          callbacks: {
            signInSuccessWithAuthResult: function(authResult, redirectUrl) {
@@ -36,7 +33,10 @@
          
         
  
-      
+        // Click event listener
+          //  btnLogin.addEventListener('click', e => {
+          //  firebase.auth().signInAnonymously();
+          //  });
    
         // Auth Listener
            firebase.auth().onAuthStateChanged(firebaseUser => {
