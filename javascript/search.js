@@ -81,6 +81,7 @@ function tables(tmdbData){
         nameLink.addClass("show-link");
         nameLink.text(tmdbTitle);
         name.append(nameLink);
+        nameLink.attr("value",listPlace);
 
         var rating = $("<th>");
         rating.text(tmdbData.vote_average);
@@ -111,17 +112,97 @@ function tables(tmdbData){
 }
 
 // --- --- --- loop function for populating tables --- --- ---
+var tmdbInfo = [];
+var listPlace = 0;
+
 function populateList(tmdb){
+    $(".information").empty();
+
     var tmdbList = tmdb.results;
+
+    var newTable = $("<table>");
+    newTable.attr("id","search-table");
+    var newthread = $("<thread>");
+    newthread.attr("id","search-thread");
+    var newTbody = $("<tbody>");
+    newTbody.attr("id","search-tbody");
+    var newRow = $("<tr>");
+    newRow.attr("id","search-categories");
+
+    $(".information").append(newTable);
+    $("#search-table").append(newthread);
+    $("#search-thread").append(newTbody);
+    $("#search-tbody").append(newRow);
+    
+    var searchTitle = $("<th>");
+    searchTitle.text("Title");
+
+    var searchRating = $("<th>");
+    searchRating.text("Rating");
+
+    var searchType = $("<th>");
+    searchType.text("Type");
+
+    var searchRuntime = $("<th>");
+    searchRuntime.text("Runetime");
+
+    var searchGenre = $("<th>");
+    searchGenre.text("Genre(s)");
+
+    var searchReview = $("<th>");
+    searchReview.text("Reviewer Score");
+
+    newRow.append(searchRating).append(searchReview).append(searchTitle).append(searchType).append(searchRuntime).append(searchGenre);
 
     for(var i=0 ; i < tmdbList.length ; i++){
         tables(tmdbList[i]);
+
+        tmdbInfo = tmdbList[i];
+        listPlace++;
     }
 }
 
 $(".show-link").on("click",function(){
-    
+    var showTitle = $(this).attr("value");
+
+    showDetails(tmdbInfo[showTitle]);
 });
+
+function showDetails(details){
+    var omdb;
+
+    var omdbURL = "https://www.omdbapi.com/?t="+details.title+"&y=&plot=short&apikey=trilogy";
+    $.ajax({
+        url: omdbURL,
+        method: "GET"
+    }).then(function(response){
+        omdb = response;
+    });
+
+    $(".information").empty();
+
+    var description = $("<div>");
+    description.text("<h3>Plot</h3>");
+    description.append(details.overview);
+
+    var detail = $("<div>");
+    detail.append("<h3>Details</h3>");
+    detail.append("<ul>");
+    detail.append("<li>Release Date: "+details.release_date+"</li>");
+    detail.append("<li>Type: "+details.media_type+"</li>");
+    if(details.media_type === "movie"){
+        detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
+        detail.append("<li>Director: "+omdb.Director+"</li>");
+        detail.append("<li>Cast :"+omdb.Actors+"</li>");
+    }
+    detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
+    detail.append("<li>Average Rating: "+details.vote_average+"</li>");
+
+    var poster = $("<img>");
+    poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
+
+    
+}
 
 <div id="disqus_thread"></div>
 <script>
