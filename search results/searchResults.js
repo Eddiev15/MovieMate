@@ -59,7 +59,7 @@ function printGenres(genreData){
 
 // --- --- --- makes a new row of data for the table --- --- ---
 function tables(tmdbData){
-    var tmdbData = tmdb.results[0];
+    // var tmdbData = tmdb.results[0];
     var tmdbTitle = tmdbData.title;
     var omdbURL = "https://www.omdbapi.com/?t="+tmdbTitle+"&y=&plot=short&apikey=trilogy";
 
@@ -114,6 +114,9 @@ function tables(tmdbData){
 }
 
 // --- --- --- loop function for populating tables --- --- ---
+var tmdbInfo = [];
+var listPlace = 0;
+
 function populateList(tmdb){
     var tmdbList = tmdb.results;
 
@@ -153,6 +156,9 @@ function populateList(tmdb){
 
     for(var i=0 ; i < tmdbList.length ; i++){
         tables(tmdbList[i]);
+
+        tmdbInfo = tmdbList[i];
+        listPlace++;
     }
 }
 
