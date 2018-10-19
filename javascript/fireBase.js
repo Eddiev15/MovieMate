@@ -30,7 +30,6 @@ var app_fireBase = {};
       console.log(firebaseUser);
     } else {
       console.log('not logged in');
-    }
   });  
                             
   }());
