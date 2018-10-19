@@ -1,6 +1,7 @@
 var jsonData = {};
 var omdbArray = [];
 
+// --- outdated, dont use
 function jsonGrab(queryURL){
     $.ajax({
         url: queryURL,
@@ -11,6 +12,7 @@ function jsonGrab(queryURL){
         // --- outputs JSON data so there's no need to reuse code
 }
 
+// --- search function
 $(document).on("click", "#movie-button",function(event){
     event.preventDefault();
 
@@ -34,7 +36,7 @@ $(document).on("click", "#movie-button",function(event){
     $(".information").empty();
 });
 
-// --- --- --- translates TMDB code into actual parsable data --- --- ---
+// --- --- --- translates TMDB code into actual parsable genre --- --- ---
 function printGenres(genreData){
     var genres = [{ "id": 28, "name": "Action" }, { "id": 12, "name": "Adventure" }, { "id": 16, "name": "Animation" },
         { "id": 35, "name": "Comedy" }, { "id": 80, "name": "Crime" }, { "id": 99, "name": "Documentary" }, { "id": 18, "name": "Drama" },
@@ -174,6 +176,7 @@ function populateList(tmdb){
     searchReview.addClass("show-review");
     searchReview.text("Reviewer Score");
 
+    // --- append to parent in order
     newRow.append(searchRating).append(searchReview).append(searchTitle).append(searchType).append(searchRuntime).append(searchGenre);
 
     // --- populates the table with actual show data
@@ -239,6 +242,7 @@ function showDetails(details){
         detail.append("<ul id='details-list'>");
         detail.append("<li>Release Date: "+details.release_date+"</li>");
         detail.append("<li>Type: "+details.media_type+"</li>");
+        
         if(details.media_type === "movie"){
             detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
             detail.append("<li>Director: "+omdb.Director+"</li>");
@@ -256,7 +260,6 @@ function showDetails(details){
         var videoDiv = $('<iframe width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>');
         // --- was previously $('<object width="560" height="315">')
         
-        var videoID;
         video.append(videoDiv);
         if(details.media_type === "movie"){ // --- if is movie
             videoDiv.attr("src","https://www.youtube.com/embed/"+movieID);
