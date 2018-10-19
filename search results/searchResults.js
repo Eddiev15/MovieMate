@@ -253,8 +253,8 @@ function showDetails(details){
 
         // --- trailer
         var video = $("<div id='trailer-video'>");
-        var videoDiv = $('<object width="560" height="315">');
-        // --- was previously $('<iframe width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>')
+        var videoDiv = $('<iframe width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>');
+        // --- was previously $('<object width="560" height="315">')
         
         var videoID;
         video.append(videoDiv);
