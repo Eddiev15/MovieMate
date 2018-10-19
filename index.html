@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MovieMate</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="search results/searchResults.js"></script>   
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    
   </head>
   <body style="background-image: url('assets/images/movieprojector.jpg');">
   <!--Navbar/Search-->
@@ -28,12 +28,12 @@
       
             
       <a href="index.html" id="logo">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIbSURBVGhD7dnPi05RHMfxB+VHyK+VnaaIBSkpSspCYWFKphQ7C4liZS0WUmwsLCzGgr9AkVhYKClphrIaUsrGNPlZEuL9iVNPp8+93cU5tzPN+dSr5nnudzrne+fc89y5z6BmDmU5zuIhXuMtHuEc1mBW5CCm8afBRxxF0dEEf8M1EDuFIrMe3+Em7fzCNvSSBTiCW3iAcYxiHuKoxk24zV1kz1o8g5uAmlqBkEX4Clfb5idWI1v0l3gKN3hwDyGb4Gq62I1s0XJyg8b2QNkJd7wL7XLZ0nW9X4UyAne8i+3Ilvtwg8ZuQ9HF/x6ups1n6PrKlptwA8cuIeQiXE2b68garVs3cGwHQrSLvYOrcz5AO2PWaKnoPslNIAjLajiboQm6+mGfsAu9RGdYH1huItoMlsBlHbQ1u98T3TxuRPZswGGM/ad1rCXzA2+gnSoca3MBz/EF3/AClxHX7ccyJI1u+nQP5M5kTjpBK5EsT+AG6sMxJMtLuEH6cBLJMhsaWYXF/35sTqmNzMchPIZqtYEcQGNKa2QpTmMKcf0EGlNSI3sxA1cr+lBtTEmN6LWrC2ojudVGXGojCdRGXGojCdRGXGojCdRGXEpqRP88HccruHo92WxMSY2E6BnbPsTP2a6hMSU2MpwtOI8zWKg3mlJ6I50zCTdIH04gWW7ADZKbvgneimTRF/1XoAurL3egR7Q1NTU1cyKDwV9vacranT/prgAAAABJRU5ErkJggg=="id="brandlogo">    
-          MovieMate</a>
+          <img src="https://i.pinimg.com/originals/60/17/03/6017037e430534b5cbc0ffbd7a1e7b52.jpg"id="brandlogo">    
+        MovieMate</a>
     <nav>
    
         
-    <button onclick="mainApp.logOut()">Log out</button>
+    <button onclick="mainApp.logOut">Log out</button>
     </nav>
     </div>
     </div>
@@ -124,28 +124,6 @@
                     
               
               
-                            <!-- Button trigger modal -->
-               <br>             
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-              </button>
-              
-              <!-- Modal -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body"><div id="movie-form">  ...</div>
-                    
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                   </div>
                 </div>
@@ -191,7 +169,9 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<script type="text/javascript" src="javascript/app.js"></script>                            
+                          
 
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="search results/searchResults.js"></script> 
 </body>
 </html>

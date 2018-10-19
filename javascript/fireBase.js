@@ -15,10 +15,12 @@ var app_fireBase = {};
   
   app_fireBase = firebase;
   
+  })()
+  
   const btnLogin = document.getElementById('btnLogin');
   
   btnLogin.addEventListener('click', e => {
     firebase.auth().signInAnonymously();
   });
   
-})()
+

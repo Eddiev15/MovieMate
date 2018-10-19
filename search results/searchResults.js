@@ -11,7 +11,7 @@ function jsonGrab(queryURL){
         // --- outputs JSON data so there's no need to reuse code
 }
 
-$("#movie-button").on("click",function(event){
+$(document).on("click", "#movie-button",function(event){
     event.preventDefault();
 
     var input = $("#search-input").val();
@@ -31,6 +31,7 @@ $("#movie-button").on("click",function(event){
         populateList(tmdbData);
     });
 
+    $(".information").empty();
 });
 
 // --- --- --- translates TMDB code into actual parsable data --- --- ---
@@ -59,18 +60,18 @@ function printGenres(genreData){
 
 // --- --- --- makes a new row of data for the table --- --- ---
 function tables(tmdbData){
-    // var tmdbData = tmdb.results[0];
+  
     var tmdbTitle = tmdbData.title;
     var omdbURL = "https://www.omdbapi.com/?t="+tmdbTitle+"&y=&plot=short&apikey=trilogy";
 
-    //console.log(tmdbData);
+    console.log(tmdbData);
 
     $.ajax({
         url: omdbURL,
         method: "GET"
     }).then(function(response){
         var omdbData = response;
-        //console.log(omdbData);
+        console.log(omdbData);
 
         if(omdbData.Error != "Movie not found!" || omdbData.Response != "false" || omdbData.Title != "Undefined"){
             var newRow = $("<tr>");
@@ -83,6 +84,11 @@ function tables(tmdbData){
             nameLink.attr("data-show-type",tmdbData.media_type);
             nameLink.text(tmdbTitle);
             name.append(nameLink);
+            // --- value for the temporary array
+            nameLink.attr("id",listPlace);
+            console.log("list location: "+listPlace);
+
+            listPlace++;
 
             var rating = $("<th>");
             rating.text(tmdbData.vote_average);
@@ -114,8 +120,15 @@ function tables(tmdbData){
 }
 
 // --- --- --- loop function for populating tables --- --- ---
+var tmdbInfo = [];
+var listPlace;
+
 function populateList(tmdb){
     var tmdbList = tmdb.results;
+    listPlace = 0;
+
+    // --- copies tmdb list into temporary array
+    tmdbInfo = tmdbList;
 
     var newTable = $("<table>");
     newTable.attr("id","search-table");
@@ -151,77 +164,92 @@ function populateList(tmdb){
 
     newRow.append(searchRating).append(searchReview).append(searchTitle).append(searchType).append(searchRuntime).append(searchGenre);
 
+    // --- populates the table with actual show data
     for(var i=0 ; i < tmdbList.length ; i++){
         tables(tmdbList[i]);
     }
 }
 
-// --- --- --- initialize firebase --- --- ---
-// var config = {
-//     apiKey: "AIzaSyCA4386BmHuyZFOS11T506MTKItLI686_0",
-//     authDomain: "moviemate-project.firebaseapp.com",
-//     databaseURL: "https://moviemate-project.firebaseio.com",
-//     projectId: "moviemate-project",
-//     storageBucket: "moviemate-project.appspot.com",
-//     messagingSenderId: "543472060012"
-// };
-
-// firebase.initializeApp(config);
-// var database = firebase.database();
-
-// --- --- --- make link --- --- ---
+// --- --- --- show details --- --- ---
 $(document).on("click", ".show-link",function(){
     var sendInfo = $(this).text();
     console.log(sendInfo);
 
-    var showTitle = $(this).attr("value");
+    // --- grab list location
+    var showTitle = parseInt($(this).attr("id"));
+    console.log("picked location: "+showTitle);
 
     showDetails(tmdbInfo[showTitle]);
 });
 
 function showDetails(details){
     var omdb;
+    var detailTitle = details.title;
+    detailTitle.split(' ').join('+');
 
-    var omdbURL = "https://www.omdbapi.com/?t="+details.title+"&y=&plot=short&apikey=trilogy";
+    var omdbURL = "https://www.omdbapi.com/?t="+detailTitle+"&y=&plot=short&apikey=trilogy";
     $.ajax({
         url: omdbURL,
         method: "GET"
     }).then(function(response){
         omdb = response;
+
+        var showTitle = $("<div>");
+        showTitle.append("<h2 id='title-div'>"+detailTitle+"</h2>")
+
+        var description = $("<div>");
+        description.append("<h3 id='plot-div'>Plot</h3>");
+        description.append(details.overview);
+
+        var detail = $("<div>");
+        detail.append("<h3>Details</h3>");
+        detail.append("<ul id='details-list'>");
+        detail.append("<li>Release Date: "+details.release_date+"</li>");
+        detail.append("<li>Type: "+details.media_type+"</li>");
+        if(details.media_type === "movie"){
+            detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
+            detail.append("<li>Director: "+omdb.Director+"</li>");
+            detail.append("<li>Cast :"+omdb.Actors+"</li>");
+        }
+        detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
+        detail.append("<li>Average Rating: "+details.vote_average+"</li>");
+
+        var poster = $("<img id='poster-image'>");
+        poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
+
+        var video = $("<div id='trailer-video'>");
+        var videoDiv = $("<iframe>");
+
+        var videoID;
+        if(details.media_type === "movie"){
+            // --- grab youtube ID
+            $.ajax({
+                url: "https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+                method: "GET"
+            }).then(function(response){
+                videoID = response.results[0].key;
+                // --- pass video id into youtube
+                videoDiv.attr("src","https://www.youtube.com/watch?v="+videoID);
+            });
+        } else if(details.media_type === "tv"){
+            // --- grab youtube ID
+            $.ajax({
+                url: "https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+                method: "GET"
+            }).then(function(response){
+                videoID = response.results[0].key;
+                // --- pass id into youtube
+                videoDiv.attr("src","https://www.youtube.com/watch?v="+videoID);
+            });
+        }
+        video.append(videoDiv);
+
+        $(".information").append(showTitle);
+        $(".information").append(description);
+        $(".information").append(poster);
+        $(".information").append(detail);
+        $(".information").append(video);
     });
 
     $(".information").empty();
-
-    var description = $("<div>");
-    description.text("<h3>Plot</h3>");
-    description.append(details.overview);
-
-    var detail = $("<div>");
-    detail.append("<h3>Details</h3>");
-    detail.append("<ul>");
-    detail.append("<li>Release Date: "+details.release_date+"</li>");
-    detail.append("<li>Type: "+details.media_type+"</li>");
-    if(details.media_type === "movie"){
-        detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
-        detail.append("<li>Director: "+omdb.Director+"</li>");
-        detail.append("<li>Cast :"+omdb.Actors+"</li>");
-    }
-    detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
-    detail.append("<li>Average Rating: "+details.vote_average+"</li>");
-
-    var poster = $("<img>");
-    poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
-
-    var video = $("<div>");
-    var videoDiv = $("<iframe>");
-    if(details.media_type === "movie"){
-        videoDiv.attr("src","https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
-    } else if(details.media_type === "tv"){
-        videoDiv.attr("src","https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
-    }
-
-    $(".information").append(description);
-    $(".information").append(poster);
-    $(".information").append(detail);
-    $(".information").append(video);
 }
