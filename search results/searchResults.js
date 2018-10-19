@@ -219,8 +219,8 @@ function showDetails(details){
 
         var video = $("<div id='trailer-video'>");
         var videoDiv = $("<iframe>");
-
         var videoID;
+        video.append(videoDiv);
         if(details.media_type === "movie"){
             // --- grab youtube ID
             $.ajax({
@@ -230,6 +230,12 @@ function showDetails(details){
                 videoID = response.results[0].key;
                 // --- pass video id into youtube
                 videoDiv.attr("src","https://www.youtube.com/watch?v="+videoID);
+
+                $(".information").append(showTitle);
+                $(".information").append(description);
+                $(".information").append(poster);
+                $(".information").append(detail);
+                $(".information").append(video);
             });
         } else if(details.media_type === "tv"){
             // --- grab youtube ID
@@ -240,15 +246,14 @@ function showDetails(details){
                 videoID = response.results[0].key;
                 // --- pass id into youtube
                 videoDiv.attr("src","https://www.youtube.com/watch?v="+videoID);
+
+                $(".information").append(showTitle);
+                $(".information").append(description);
+                $(".information").append(poster);
+                $(".information").append(detail);
+                $(".information").append(video);
             });
         }
-        video.append(videoDiv);
-
-        $(".information").append(showTitle);
-        $(".information").append(description);
-        $(".information").append(poster);
-        $(".information").append(detail);
-        $(".information").append(video);
     });
 
     $(".information").empty();
