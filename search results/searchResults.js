@@ -194,7 +194,7 @@ function showDetails(details){
         omdb = response;
 
         var description = $("<div>");
-        description.html("<h3>Plot</h3>");
+        description.append("<h3>Plot</h3>");
         description.append(details.overview);
 
         var detail = $("<div>");
@@ -220,6 +220,7 @@ function showDetails(details){
         } else if(details.media_type === "tv"){
             videoDiv.attr("src","https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
         }
+        video.append(videoDiv);
 
         $(".information").append(description);
         $(".information").append(poster);
