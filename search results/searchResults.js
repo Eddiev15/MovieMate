@@ -253,13 +253,12 @@ function showDetails(details){
 
         // --- trailer
         var video = $("<div id='trailer-video'>");
-        var videoDiv = $('<iframe width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>');
+        var videoDiv = $('<object width="560" height="315">');
         var videoID;
         video.append(videoDiv);
-
-        if(details.media_type === "movie"){
+        if(details.media_type === "movie"){ // --- if is movie
             videoDiv.attr("src","https://www.youtube.com/embed/"+movieID);
-        } else if(details.media_type === "tv"){
+        } else if(details.media_type === "tv"){ // --- if is tv show
             videoDiv.attr("src","https://www.youtube.com/embed/"+tvID);
         }
         
