@@ -216,10 +216,28 @@ function showDetails(details){
 
         var video = $("<div>");
         var videoDiv = $("<iframe>");
+
+        var videoID;
         if(details.media_type === "movie"){
-            videoDiv.attr("src","https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
+            // --- grab youtube ID
+            $.ajax({
+                url: "https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+                method: "GET"
+            }).then(function(response){
+                videoID = response.results[0].key;
+                // --- pass video id into youtube
+                videoDiv.attr("src","https://www.youtube.com/watch?v="+videoID);
+            });
         } else if(details.media_type === "tv"){
-            videoDiv.attr("src","https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=%3C%3Capi_key%3E%3E&language=en-US");
+            // --- grab youtube ID
+            $.ajax({
+                url: "https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+                method: "GET"
+            }).then(function(response){
+                videoID = response.results[0].key;
+                // --- pass id into youtube
+                videoDiv.attr("src","https://www.youtube.com/watch?v="+videoID);
+            });
         }
         video.append(videoDiv);
 
