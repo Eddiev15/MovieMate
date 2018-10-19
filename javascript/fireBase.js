@@ -13,11 +13,15 @@ var app_fireBase = {};
   };
   firebase.initializeApp(config);
   
-  app_fireBase = firebase;
+  const btnLogout = document.getElementById('btnLogout');
   
-  })()
+  }());
   
   const btnLogin = document.getElementById('btnLogin');
+
+  btnLogout.addEventListener('click', e => {
+    firebase.auth().signOut();
+  });  
   
   btnLogin.addEventListener('click', e => {
     firebase.auth().signInAnonymously();
