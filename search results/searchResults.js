@@ -183,12 +183,31 @@ $(document).on("click", ".show-link",function(){
 });
 
 function showDetails(details){
+    $(".information").empty();
+    console.log(details);
+
     var omdb;
     var detailTitle = details.title;
     detailTitle.split(' ').join('+');
 
+    var movieID = "";
+    var tvID = "";
+
     var omdbURL = "https://www.omdbapi.com/?t="+detailTitle+"&y=&plot=short&apikey=trilogy";
+
     $.ajax({
+        url: "https://api.themoviedb.org/3/movie/"+details.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+        method: "GET"
+    }).then(function(response){
+        movieID = response.results[0].key;
+        console.log("movieID: "+movieID);
+    }).then($.ajax({
+        url: "https://api.themoviedb.org/3/tv/"+details.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+        method: "GET"
+    }).then(function(response){
+        tvID = response.results[0].key;
+        console.log("tv ID: "+tvID);
+    }).then($.ajax({
         url: omdbURL,
         method: "GET"
     }).then(function(response){
@@ -218,43 +237,91 @@ function showDetails(details){
         poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
 
         var video = $("<div id='trailer-video'>");
-        var videoDiv = $("<iframe>");
+        var videoDiv = $('<iframe  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>');
         var videoID;
         video.append(videoDiv);
+
         if(details.media_type === "movie"){
-            // --- grab youtube ID
-            $.ajax({
-                url: "https://api.themoviedb.org/3/movie/"+detail.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
-                method: "GET"
-            }).then(function(response){
-                videoID = response.results[0].key;
-                // --- pass video id into youtube
-                videoDiv.attr("src","https://www.youtube.com/watch?v="+videoID);
-
-                $(".information").append(showTitle);
-                $(".information").append(description);
-                $(".information").append(poster);
-                $(".information").append(detail);
-                $(".information").append(video);
-            });
+            videoDiv.attr("width","640");
+            videoDiv.attr("height","480");
+            videoDiv.attr("src","https://www.youtube.com/embed/"+movieID);
         } else if(details.media_type === "tv"){
-            // --- grab youtube ID
-            $.ajax({
-                url: "https://api.themoviedb.org/3/tv/"+detail.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
-                method: "GET"
-            }).then(function(response){
-                videoID = response.results[0].key;
-                // --- pass id into youtube
-                videoDiv.attr("src","https://www.youtube.com/watch?v="+videoID);
-
-                $(".information").append(showTitle);
-                $(".information").append(description);
-                $(".information").append(poster);
-                $(".information").append(detail);
-                $(".information").append(video);
-            });
+            videoDiv.attr("width","640");
+            videoDiv.attr("height","480");
+            videoDiv.attr("src","https://www.youtube.com/embed/"+tvID);
         }
-    });
+        $(".information").append(showTitle);
+        $(".information").append(description);
+        $(".information").append(poster);
+        $(".information").append(detail);
+        $(".information").append(video);
+    })));
 
-    $(".information").empty();
+    // $.ajax({
+    //     url: omdbURL,
+    //     method: "GET"
+    // }).then(function(response){
+    //     omdb = response;
+
+    //     var showTitle = $("<div>");
+    //     showTitle.append("<h2 id='title-div'>"+detailTitle+"</h2>")
+
+    //     var description = $("<div>");
+    //     description.append("<h3 id='plot-div'>Plot</h3>");
+    //     description.append(details.overview);
+
+    //     var detail = $("<div>");
+    //     detail.append("<h3>Details</h3>");
+    //     detail.append("<ul id='details-list'>");
+    //     detail.append("<li>Release Date: "+details.release_date+"</li>");
+    //     detail.append("<li>Type: "+details.media_type+"</li>");
+    //     if(details.media_type === "movie"){
+    //         detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
+    //         detail.append("<li>Director: "+omdb.Director+"</li>");
+    //         detail.append("<li>Cast :"+omdb.Actors+"</li>");
+    //     }
+    //     detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
+    //     detail.append("<li>Average Rating: "+details.vote_average+"</li>");
+
+    //     var poster = $("<img id='poster-image'>");
+    //     poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
+
+    //     var video = $("<div id='trailer-video'>");
+    //     var videoDiv = $("<iframe>");
+    //     var videoID;
+    //     video.append(videoDiv);
+    //     if(details.media_type === "movie"){
+    //         // --- grab youtube ID
+    //         $.ajax({
+    //             url: "https://api.themoviedb.org/3/movie/"+details.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+    //             method: "GET"
+    //         }).then(function(response){
+    //             videoID = response.results[0].key;
+    //             // --- pass video id into youtube
+    //             videoDiv.attr("src","https://www.youtube.com/embed/"+videoID);
+
+    //             $(".information").append(showTitle);
+    //             $(".information").append(description);
+    //             $(".information").append(poster);
+    //             $(".information").append(detail);
+    //             $(".information").append(video);
+    //         });
+    //     } else if(details.media_type === "tv"){
+    //         // --- grab youtube ID
+    //         $.ajax({
+    //             url: "https://api.themoviedb.org/3/tv/"+details.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+    //             method: "GET"
+    //         }).then(function(response){
+    //             videoID = response.results[0].key;
+    //             // --- pass id into youtube
+    //             videoDiv.attr("src","https://www.youtube.com/embed/"+videoID);
+
+    //             $(".information").append(showTitle);
+    //             $(".information").append(description);
+    //             $(".information").append(poster);
+    //             $(".information").append(detail);
+    //             $(".information").append(video);
+    //         });
+    //     }
+    // });
 }
