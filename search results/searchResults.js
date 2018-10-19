@@ -31,6 +31,7 @@ $(document).on("click", "#movie-button",function(event){
         populateList(tmdbData);
     });
 
+    $(".information").empty();
 });
 
 // --- --- --- translates TMDB code into actual parsable data --- --- ---
