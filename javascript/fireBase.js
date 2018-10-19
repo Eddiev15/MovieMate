@@ -23,6 +23,7 @@ var app_fireBase = {};
   
   btnLogin.addEventListener('click', e => {
     firebase.auth().signInAnonymously();
+    }
   });
   
 
