@@ -4,15 +4,26 @@ body {
     background-attachment: fixed;
     background-position: center; 
     background-color: black;
+    margin: 0%;
+    padding: 0%;
+}
+
+#popcorn {
+  opacity: .5;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0%;
+  padding: 0%;
 }
 
 .firebaseui-auth-container{
   background: transparent;
-  height: 100%;
+  margin: 0%;
+  padding: 0%;
 }
 
 .container{
-  background-color: #1b1b1b94;
   width: 100%;
   height: 100%;
 }
@@ -39,27 +50,27 @@ body {
 }
 
 .facebook {
-  background: #3B5998;
+  background: transparent;
   color: white;
 }
 
 .twitter {
-  background: #55ACEE;
+  background: transparent;
   color: white;
 }
 
 .google {
-  background: #dd4b39;
+  background: transparent;
   color: white;
 }
 
 .linkedin {
-  background: #007bb5;
+  background: transparent;
   color: white;
 }
 
 .youtube {
-  background: #bb0000;
+  background: transparent;
   color: white;
 }
 
@@ -79,18 +90,11 @@ body {
 /*Footer*/
 .footer {
   position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  top: 554px;
-  padding: 1rem;
-  background-color: #2523237e;
+  margin: 0%;
+  padding: 0%;
+  background-color: grey;
   text-align: center;
-  font-family: 'Libre Franklin', sans-serif;
-}
-
-.col-sm{
-  display: inline-block;
-  padding: 5px;
-  width: 50px;
+  font-family: 'Pacifico', cursive;
+  opacity: .6;
+  font-size: 200%;
 }
