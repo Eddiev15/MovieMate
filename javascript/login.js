@@ -37,7 +37,6 @@
          // Terms of service url.
          tosUrl: 'mmindex.html'
          // Privacy policy url.
-
        };
      
        
