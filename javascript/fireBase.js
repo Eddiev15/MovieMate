@@ -15,8 +15,6 @@ var app_fireBase = {};
   
   const btnLogout = document.getElementById('btnLogout');
   
-  }());
-  
   const btnLogin = document.getElementById('btnLogin');
 
   btnLogout.addEventListener('click', e => {
