@@ -198,9 +198,9 @@ function showDetails(details){
         description.append("<h3>Plot</h3>");
         description.append(details.overview);
 
-        var detail = $("<div>");
+        var detail = $("<div id='descripion-div'>");
         detail.append("<h3>Details</h3>");
-        detail.append("<ul>");
+        detail.append("<ul id='details-list'>");
         detail.append("<li>Release Date: "+details.release_date+"</li>");
         detail.append("<li>Type: "+details.media_type+"</li>");
         if(details.media_type === "movie"){
@@ -211,10 +211,10 @@ function showDetails(details){
         detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
         detail.append("<li>Average Rating: "+details.vote_average+"</li>");
 
-        var poster = $("<img>");
+        var poster = $("<img id='poster-image'>");
         poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
 
-        var video = $("<div>");
+        var video = $("<div id='trailer-video'>");
         var videoDiv = $("<iframe>");
 
         var videoID;
