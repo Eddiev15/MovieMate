@@ -19,18 +19,18 @@ var app_fireBase = {};
 
   btnLogout.addEventListener('click', e => {
     firebase.auth().signOut();
-  });  
+  }
   
   btnLogin.addEventListener('click', e => {
     firebase.auth().signInAnonymously();
-  });
+  }
   
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
       console.log(firebaseUser);
     } else {
       console.log('not logged in');
-  });  
+  }
                             
   }());
   
