@@ -228,10 +228,12 @@ function showDetails(details){
         var showTitle = $("<div>");
         showTitle.append("<h2 id='title-div'>"+detailTitle+"</h2>")
 
+        // --- plot summary
         var description = $("<div>");
         description.append("<h3 id='plot-div'>Plot</h3>");
         description.append(details.overview);
 
+        // --- list of general info
         var detail = $("<div>");
         detail.append("<h3>Details</h3>");
         detail.append("<ul id='details-list'>");
@@ -245,23 +247,23 @@ function showDetails(details){
         detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
         detail.append("<li>Average Rating: "+details.vote_average+"</li>");
 
+        // --- promo image
         var poster = $("<img id='poster-image'>");
         poster.attr("src","https://image.tmdb.org/t/p/w500/"+details.poster_path);
 
+        // --- trailer
         var video = $("<div id='trailer-video'>");
-        var videoDiv = $('<iframe  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>');
+        var videoDiv = $('<iframe width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>');
         var videoID;
         video.append(videoDiv);
 
         if(details.media_type === "movie"){
-            videoDiv.attr("width","640");
-            videoDiv.attr("height","480");
             videoDiv.attr("src","https://www.youtube.com/embed/"+movieID);
         } else if(details.media_type === "tv"){
-            videoDiv.attr("width","640");
-            videoDiv.attr("height","480");
             videoDiv.attr("src","https://www.youtube.com/embed/"+tvID);
         }
+        
+        // --- append it onto the div
         $(".information").append(showTitle);
         $(".information").append(description);
         $(".information").append(poster);
