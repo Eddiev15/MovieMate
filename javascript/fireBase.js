@@ -1,4 +1,3 @@
-
 var app_fireBase = {};
 (function(){
 
@@ -12,22 +11,11 @@ var app_fireBase = {};
     messagingSenderId: "320634779607"
   };
   firebase.initializeApp(config);
-  
-  const btnLogin = document.getElementById('btnLogin');
 
-  btnLogout.addEventListener('click', e => {
-    firebase.auth().signOut();
-  })
+  app_fireBase = firebase;
+
+})()
   
-  btnLogin.addEventListener('click', e => {
-    firebase.auth().signInAnonymously();
-  })
+
   
-  firebase.auth().onAuthStateChanged(firebaseUser => {
-    if(firebaseUser) {
-      console.log(firebaseUser);
-    } else {
-      console.log('not logged in');
-  }
-                            
-  })})
+

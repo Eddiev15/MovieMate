@@ -21,5 +21,13 @@ function logOut(){
 mainApp.logOut = logOut;
 })()
 
+const btnLogin = document.getElementById('btnLogin');
 
+btnLogout.addEventListener('click', e => {
+  firebase.auth().signOut();
+})
+
+btnLogin.addEventListener('click', e => {
+  firebase.auth().signInAnonymously();
+})
 
