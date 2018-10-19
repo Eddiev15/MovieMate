@@ -6,13 +6,7 @@ var uid = null;
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-    uid = user.uid
-  
-  
-  }if (uid) {
-      
-    uid = uid  
-      
+    uid = user.uid;
   }else{
     // redirect to login page
     uid = null;
@@ -24,7 +18,7 @@ function logOut(){
   firebase.auth().signOut();
 }
 
-mainApp.logOut = logOut
+mainApp.logOut = logOut;
 })()
 
 
