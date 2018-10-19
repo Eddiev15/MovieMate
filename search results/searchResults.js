@@ -194,7 +194,7 @@ function showDetails(details){
         omdb = response;
 
         var description = $("<div>");
-        description.text("<h3>Plot</h3>");
+        description.html("<h3>Plot</h3>");
         description.append(details.overview);
 
         var detail = $("<div>");
