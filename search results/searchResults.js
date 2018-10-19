@@ -92,19 +92,24 @@ function tables(tmdbData){
 
             var rating = $("<th>");
             rating.text(tmdbData.vote_average);
+            rating.addClass("show-review");
 
             var genres = $("<th>");
             genres.text(printGenres(tmdbData.genre_ids));
+            genres.addClass("show-genres");
 
             var length = $("<th>");
             length.text(omdbData.Runtime);
+            length.addClass("show-runtime");
 
             var rated = $("<th>");
             rated.text(omdbData.Rated);
+            rated.addClass("show-rating");
 
             var type = $("<th>");
             type.text(tmdbData.media_type);
             type.attr("data-show-type",tmdbData.media_type);
+            type.addClass("show-type");
 
             $("tbody").append(newRow);
 
@@ -139,27 +144,34 @@ function populateList(tmdb){
     var newRow = $("<tr>");
     newRow.attr("id","search-categories");
 
+    // --- chain appends onto parent divs
     $(".information").append(newTable);
     $("#search-table").append(newthread);
     $("#search-thread").append(newTbody);
     $("#search-tbody").append(newRow);
     
     var searchTitle = $("<th>");
+    searchTitle.addClass("show-title");
     searchTitle.text("Title");
 
     var searchRating = $("<th>");
+    searchRating.addClass("show-rating")
     searchRating.text("Rating");
 
     var searchType = $("<th>");
+    searchType.addClass("show-type");
     searchType.text("Type");
 
     var searchRuntime = $("<th>");
+    searchRuntime.addClass("show-runtime");
     searchRuntime.text("Runetime");
 
     var searchGenre = $("<th>");
+    searchGenre.addClass("show-genres")
     searchGenre.text("Genre(s)");
 
     var searchReview = $("<th>");
+    searchReview.addClass("show-review");
     searchReview.text("Reviewer Score");
 
     newRow.append(searchRating).append(searchReview).append(searchTitle).append(searchType).append(searchRuntime).append(searchGenre);
