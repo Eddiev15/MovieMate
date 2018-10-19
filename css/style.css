@@ -2,13 +2,20 @@
   font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
   font-size: 18px;
   line-height: 34px;
-  color: #777;
-  background-image: 100%;
-  background-image: no-repeat;
+   color: grey; 
+}
+h1{ 
+font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif; 
+font-size: 30px;
+line-height: 49px;
+text-align: center;
+}
+#movie-button{
+  margin-left: 42%;
 }
 
-* {
-  box-sizing: border-box;
+#search-input{
+  margin-left: 40%;
 }
 
 #masthead {
@@ -16,8 +23,8 @@
   z-index: 99;
   width: 100%;
   overflow: auto;
-  color: #fff;
-  background:rgb(2, 2, 77);
+  color: grey;
+  background:black;
   border-bottom: 1px solid grey;
 }
 #brandlogo {
@@ -35,10 +42,10 @@
   font-size: 30px;
   font-weight: 700;
   line-height: 70px;
-  color: #fff;
+  color: grey;
   text-align: center;
   text-decoration: none;
-  background:rgb(2, 2, 77);
+  background:black;
 }
 
 nav {
@@ -46,17 +53,6 @@ nav {
   margin-top: 25px;
   padding-right: 10px;
 }
-
-nav a {
-  display: inline-block;
-  padding-left: 15px;
-  margin-left: 15px;
-  line-height: 18px;
-  color: #999;
-  text-decoration: none;
-  border-left: 1px solid #efefef;
-}
-
 nav a:first-child {
   border-left: 0 none;
 }
@@ -70,63 +66,6 @@ nav a:first-child {
   clear: both;
 }
 
-h1,
-h2,
-h3,
-p {
-  margin-bottom: 20px;
-}
-
-p:last-child {
-  margin-bottom: 0;
-}
-
-h1,
-h2,
-h3 {
-  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
-  font-weight: 700;
-  color: #fb8c00;
-}
-
-h1 {
-  padding-bottom: 20px;
-  font-size: 30px;
-  line-height: 49px;
-  border-bottom: 3px solid #ddd;
-}
-
-h2,
-h3 {
-  font-size: 22px;
-}
-
-/* header */
-
-h3, h2 {
-  padding-bottom: 20px;
-  margin-bottom: 15px;
-  line-height: 22px;
-  border-bottom: 2px solid #eee;
-}
-
-/* main */
-
-#main-container {
-  padding-top: 130px;
-  min-height: calc(100vh - 70px);
-}
-
-.main-section {
-  float: left;
-  width: 100%;
-  max-width: 960px;
-  padding: 30px;
-  margin: 0 0 40px;
-  background: rgb(105, 103, 103);
-  border: 1px solid #ddd;
-}
-
 .d-block {
   width: 450px;
   height: 300px;
@@ -135,18 +74,64 @@ h3, h2 {
 #carouselExampleIndicators {
   width:470px;
 }
-
-/* footer */
-
-footer {
-  padding: 30px 0;
-  clear: both;
-  font-size: 12px;
-  color: #fff;
-  color: #ccc;
-  text-align: center;
-  background: #666;
-  border-top: 8px solid #4aaaa5;
-  height: 50px;
+.jumbotron{
+  background-image: url("../images/movie_reel.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;
 }
 
+
+.information{
+  text-align: center;
+  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
+  font-size: 18px;
+  color: grey;
+  }
+ 
+#title-div{
+  text-align: center;
+  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
+   font-size: 28px;
+}
+#plot-div{
+  padding-bottom: 10px;
+  text-align: center;
+  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
+   font-size: 18px;
+}
+#details-list{
+  text-align: center;
+  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
+   font-size: 18px;
+}
+#poster-image{
+  text-align: center;
+  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
+  font-size: 18px;
+}
+#trailer-video{
+  text-align: center;
+  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
+   font-size: 18px;
+}
+
+#disqus_thread{
+  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
+   font-size: 18px;
+   color: grey; 
+}
+
+#comments-box{
+  font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
+   font-size: 18px;
+   color: grey;
+}
+
+table, th, td {
+  margin-left: 7cm;
+  margin-right: 4cm;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid grey;
+}
