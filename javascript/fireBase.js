@@ -23,7 +23,16 @@ var app_fireBase = {};
   
   btnLogin.addEventListener('click', e => {
     firebase.auth().signInAnonymously();
-    }
   });
+  
+  firebase.auth().onAuthStateChanged(firebaseUser => {
+    if(firebaseUser) {
+      console.log(firebaseUser);
+    } else {
+      console.log('not logged in');
+    }
+  });  
+                            
+  }());
   
 
