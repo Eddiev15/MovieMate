@@ -1,4 +1,4 @@
-var app_fireBase = {};
+// var app_fireBase = {};
 (function(){
 
   // Initialize Firebase
@@ -12,10 +12,30 @@ var app_fireBase = {};
   };
   firebase.initializeApp(config);
 
-  app_fireBase = firebase;
 
-})()
+
+
+  btnLogin.addEventListener('click', e => {
+    firebase.auth().signInAnonymously();
+  });
+ 
+  btnLogout.addEventListener('click', e => {
+    firebase.auth().signOut();
+  });
+
+  firebase.auth().onAuthStateChanged(firebaseUser => {
+    console.log(firebaseUser);
+  });
   
+
+
+  
+}());
+  
+// app_fireBase = firebase;
+
+
+
 
   
 
