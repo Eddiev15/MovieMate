@@ -18,8 +18,14 @@ firebase.auth().onAuthStateChanged(function(user) {
     uid = null;
     window.location.replace("login.html");
  }
-
 });
+
+function logOut(){
+  firebase.auth().signOut();
+}
+
+mainApp.logOut = logOut
+})()
 
 
 

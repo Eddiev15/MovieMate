@@ -13,17 +13,15 @@ var app_fireBase = {};
   };
   firebase.initializeApp(config);
   
-  const btnLogout = document.getElementById('btnLogout');
-  
   const btnLogin = document.getElementById('btnLogin');
 
   btnLogout.addEventListener('click', e => {
     firebase.auth().signOut();
-  }
+  })
   
   btnLogin.addEventListener('click', e => {
     firebase.auth().signInAnonymously();
-  }
+  })
   
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
@@ -32,6 +30,4 @@ var app_fireBase = {};
       console.log('not logged in');
   }
                             
-  }());
-  
-
+  })})

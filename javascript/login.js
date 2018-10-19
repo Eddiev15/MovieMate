@@ -27,7 +27,7 @@
            //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
            firebase.auth.GithubAuthProvider.PROVIDER_ID,
            firebase.auth.EmailAuthProvider.PROVIDER_ID,
-           firebase.auth().signInAnonymously(),
+          //  firebase.auth().signInAnonymously(),
            //firebase.auth.PhoneAuthProvider.PROVIDER_ID
          ],
          
@@ -35,9 +35,9 @@
            
          
          // Terms of service url.
-         tosUrl: 'mmindex.html',
+         tosUrl: 'mmindex.html'
          // Privacy policy url.
-         privacyPolicyUrl: '<your-privacy-policy-url>'
+         privacyPolicyUrl: 'mmindex.html'
        };
      
        
