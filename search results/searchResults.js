@@ -194,11 +194,14 @@ function showDetails(details){
     }).then(function(response){
         omdb = response;
 
+        var showTitle = $("<div>");
+        showTitle.append("<h2 id='title-div'>"+detailTitle+"</h2>")
+
         var description = $("<div>");
-        description.append("<h3>Plot</h3>");
+        description.append("<h3 id='plot-div'>Plot</h3>");
         description.append(details.overview);
 
-        var detail = $("<div id='descripion-div'>");
+        var detail = $("<div>");
         detail.append("<h3>Details</h3>");
         detail.append("<ul id='details-list'>");
         detail.append("<li>Release Date: "+details.release_date+"</li>");
@@ -241,6 +244,7 @@ function showDetails(details){
         }
         video.append(videoDiv);
 
+        $(".information").append(showTitle);
         $(".information").append(description);
         $(".information").append(poster);
         $(".information").append(detail);
