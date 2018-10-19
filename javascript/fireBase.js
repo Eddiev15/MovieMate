@@ -13,9 +13,9 @@ var app_fireBase = {};
   };
   firebase.initializeApp(config);
   
-  app_fireBase = firebase;
+  const btnLogout = document.getElementById('btnLogout');
   
-  })()
+  }());
   
   const btnLogin = document.getElementById('btnLogin');
   
