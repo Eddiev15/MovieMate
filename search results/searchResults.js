@@ -89,7 +89,8 @@ function tables(tmdbData){
             // --- value for the temporary array
             nameLink.attr("id",listPlace);
             console.log("list location: "+listPlace);
-
+            
+            tmdbInfo[listPlace] = tmdbData;
             listPlace++;
 
             var rating = $("<th>");
@@ -135,7 +136,7 @@ function populateList(tmdb){
     listPlace = 0;
 
     // --- copies tmdb list into temporary array
-    tmdbInfo = tmdbList;
+    // --- legacy --- tmdbInfo = tmdbList;
 
     var newTable = $("<table>");
     newTable.attr("id","search-table");
