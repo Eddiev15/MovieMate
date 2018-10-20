@@ -270,12 +270,12 @@ function showDetails(details){
         var videoDiv = $('<iframe width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>');
         // --- was previously $('<object width="560" height="315">')
         
-        video.append(videoDiv);
+        videoDiv.attr("src","https://www.youtube.com/embed/"+movieID);
         if(details.media_type === "tv"){ // --- if is tv show
             videoDiv.attr("src","https://www.youtube.com/embed/"+tvID);
-        } else { // --- if is for movies
-            videoDiv.attr("src","https://www.youtube.com/embed/"+movieID);
         }
+
+        video.append(videoDiv);
         
         // --- append it onto the div
         $(".information").append(showTitle);
