@@ -2,7 +2,7 @@
   font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
   font-size: 18px;
   line-height: 34px;
-   color: grey; 
+   color: white; 
 }
 h1{ 
 font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif; 
@@ -23,9 +23,9 @@ text-align: center;
   z-index: 99;
   width: 100%;
   overflow: auto;
-  color: grey;
-  background:rgb(2, 2, 77);
-  border-bottom: 1px solid grey;
+  color: white;
+  background:black;
+  border-bottom: 1px solid white;
 }
 #brandlogo {
   width: 55px;
@@ -42,10 +42,10 @@ text-align: center;
   font-size: 30px;
   font-weight: 700;
   line-height: 70px;
-  color: grey;
+  color: white;
   text-align: center;
   text-decoration: none;
-  background:rgb(2, 2, 77);
+  background:black;
 }
 
 nav {
@@ -86,7 +86,7 @@ nav a:first-child {
   text-align: center;
   font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
   font-size: 18px;
-  color: grey;
+  color: white;
   }
  
 #title-div{
@@ -119,13 +119,13 @@ nav a:first-child {
 #disqus_thread{
   font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
    font-size: 18px;
-   color: grey; 
+   color: white; 
 }
 
 #comments-box{
   font-family: 'Cinzel',Georgia, Times, "Times New Roman", serif;
    font-size: 18px;
-   color: grey;
+   color: white;
 }
 
 table, th, td {
@@ -133,5 +133,5 @@ table, th, td {
   margin-right: 4cm;
   text-align: center;
   padding: 15px;
-  border: 1px solid black;
+  border: 1px solid white;
 }
