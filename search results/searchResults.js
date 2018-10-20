@@ -187,6 +187,8 @@ function populateList(tmdb){
 }
 
 // --- --- --- show details --- --- ---
+var movieCount;
+
 $(document).on("click", ".show-link",function(){
     var sendInfo = $(this).text();
     console.log(sendInfo);
@@ -196,6 +198,8 @@ $(document).on("click", ".show-link",function(){
     console.log("picked location: "+showTitle);
 
     showDetails(tmdbInfo[showTitle]);
+
+    movieCheck(sendInfo);
 });
 
 function showDetails(details){
@@ -211,19 +215,23 @@ function showDetails(details){
 
     var omdbURL = "https://www.omdbapi.com/?t="+detailTitle+"&y=&plot=short&apikey=trilogy";
 
-    $.ajax({
+    $.ajax({ // --- grab movie trailer youtube ID
         url: "https://api.themoviedb.org/3/movie/"+details.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
         method: "GET"
     }).then(function(response){
         movieID = response.results[0].key;
         console.log("movieID: "+movieID);
-    }).then($.ajax({
-        url: "https://api.themoviedb.org/3/tv/"+details.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
-        method: "GET"
-    }).then(function(response){
-        tvID = response.results[0].key;
-        console.log("tv ID: "+tvID);
-    }).then($.ajax({
+
+        // --- also get the TV show ID while we're at it
+        $.ajax({
+            url: "https://api.themoviedb.org/3/tv/"+details.id+"/videos?api_key=d19279e423255c630256c57ee162db9f&language=en-US",
+            method: "GET"
+        }).then(function(response){
+            tvID = response.results[0].key;
+            console.log("tv ID: "+tvID);
+        });
+        
+    }).then($.ajax({ // -- regrab specific omdb info just in case
         url: omdbURL,
         method: "GET"
     }).then(function(response){
@@ -262,7 +270,7 @@ function showDetails(details){
         // --- was previously $('<object width="560" height="315">')
         
         video.append(videoDiv);
-        if(details.media_type != "movie"){ // --- if is tv show
+        if(details.media_type !== "movie"){ // --- if is tv show
             videoDiv.attr("src","https://www.youtube.com/embed/"+tvID);
         } else { // --- if is for movies
             videoDiv.attr("src","https://www.youtube.com/embed/"+movieID);
@@ -274,7 +282,7 @@ function showDetails(details){
         $(".information").append(poster);
         $(".information").append(detail);
         $(".information").append(video);
-    })));
+    }));
 
     // $.ajax({
     //     url: omdbURL,
@@ -343,4 +351,32 @@ function showDetails(details){
     //         });
     //     }
     // });
+}
+
+// --- --- --- Initialize Firebase --- --- ---
+var config = {
+    apiKey: "AIzaSyALG9fx6_VKlL18XRaVMYRJYfof2FIIVYY",
+    authDomain: "moviemate-pagepass.firebaseapp.com",
+    databaseURL: "https://moviemate-pagepass.firebaseio.com",
+    projectId: "moviemate-pagepass",
+    storageBucket: "moviemate-pagepass.appspot.com",
+    messagingSenderId: "611011241053"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
+
+function movieCheck(title){
+    var isMovie;
+    if(snapshot.val(title) == true){
+        movieCount = snapshot.val(title).clickCount;
+        movieCount++;
+        database.ref(sendInfo).push({
+            clickCount: movieCount
+        });
+    } else {
+        movieCount = 1;
+        database.ref(sendInfo).push({
+            clickCount: movieCount
+        });
+    }
 }
