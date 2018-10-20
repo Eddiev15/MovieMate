@@ -271,7 +271,7 @@ function showDetails(details){
         // --- was previously $('<object width="560" height="315">')
         
         video.append(videoDiv);
-        if(details.media_type !== "movie"){ // --- if is tv show
+        if(details.media_type === "tv"){ // --- if is tv show
             videoDiv.attr("src","https://www.youtube.com/embed/"+tvID);
         } else { // --- if is for movies
             videoDiv.attr("src","https://www.youtube.com/embed/"+movieID);
