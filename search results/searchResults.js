@@ -199,6 +199,7 @@ $(document).on("click", ".show-link",function(){
 
     showDetails(tmdbInfo[showTitle]);
 
+    // --- push to firebase?
     movieCheck(sendInfo);
 });
 
@@ -230,7 +231,7 @@ function showDetails(details){
             tvID = response.results[0].key;
             console.log("tv ID: "+tvID);
         });
-        
+
     }).then($.ajax({ // -- regrab specific omdb info just in case
         url: omdbURL,
         method: "GET"
@@ -368,6 +369,7 @@ var database = firebase.database();
 function movieCheck(title){
     var isMovie;
     if(snapshot.val(title) == true){
+        // --- push?
         movieCount = snapshot.val(title).clickCount;
         movieCount++;
         database.ref(sendInfo).push({
@@ -375,7 +377,8 @@ function movieCheck(title){
         });
     } else {
         movieCount = 1;
-        database.ref(sendInfo).push({
+        // --- new?
+        database.ref(sendInfo).set({
             clickCount: movieCount
         });
     }
