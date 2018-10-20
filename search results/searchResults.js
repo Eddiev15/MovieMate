@@ -256,7 +256,7 @@ function showDetails(details){
         if(details.media_type === "movie"){
             detail.append("<li>Runtime: "+omdb.Runetime+"</li>");
             detail.append("<li>Director: "+omdb.Director+"</li>");
-            detail.append("<li>Cast :"+omdb.Actors+"</li>");
+            detail.append("<li>Cast: "+omdb.Actors+"</li>");
         }
         detail.append("<li>Genres: "+printGenres(details.genre_ids)+"</li>");
         detail.append("<li>Average Rating: "+details.vote_average+"</li>");
